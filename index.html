@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Enabled Marketer — Myosin.xyz</title>
+    <meta name="description" content="Learn to build AI-powered marketing tools, automate workflows, and ship real projects. Self-paced video community for marketers. No coding required.">
+    <meta property="og:title" content="AI-Enabled Marketer — Myosin.xyz">
+    <meta property="og:description" content="Self-paced AI curriculum for marketers. Build automation workflows, content tools, and real projects with hands-on video modules and a supportive community.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #161616;
+            --bg-card-hover: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --accent: #c8ff00;
+            --accent-hover: #d4ff33;
+            --accent-dim: rgba(200, 255, 0, 0.1);
+            --border: #222222;
+            --border-light: #333333;
+            --radius: 12px;
+            --radius-lg: 16px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 32px;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 10, 0.8);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .nav-logo span { color: var(--accent); }
+
+        .nav-cta {
+            background: var(--accent);
+            color: #000;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .nav-cta:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(200, 255, 0, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content { max-width: 720px; position: relative; z-index: 1; }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--accent-dim);
+            border: 1px solid rgba(200, 255, 0, 0.2);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 32px;
+        }
+
+        .hero-badge::before { content: '⚡'; }
+
+        .hero h1 {
+            font-size: clamp(36px, 6vw, 64px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1.05;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 .highlight { color: var(--accent); }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 540px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        /* FORM */
+        .form-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            max-width: 480px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .form-container h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .form-container .form-sub {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .form-group { margin-bottom: 16px; }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 15px;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(200, 255, 0, 0.1);
+        }
+
+        .form-group input::placeholder { color: var(--text-muted); }
+
+        .form-group select { cursor: pointer; appearance: none; }
+
+        .form-group select option { background: var(--bg-primary); color: var(--text-primary); }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--accent);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 8px;
+        }
+
+        .submit-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        .form-note {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 12px;
+        }
+
+        /* SUCCESS STATE */
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 32px 16px;
+        }
+
+        .form-success .check-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--accent-dim);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+        }
+
+        .form-success h3 { font-size: 22px; margin-bottom: 8px; }
+        .form-success p { color: var(--text-secondary); font-size: 15px; }
+
+        /* FEATURES */
+        .features {
+            padding: 80px 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .features-header h2 {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+
+        .features-header p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--border-light);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-dim);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* SOCIAL PROOF */
+        .social-proof {
+            padding: 60px 24px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-secondary);
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .stat-item h4 {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--accent);
+            letter-spacing: -1px;
+        }
+
+        .stat-item p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        /* WHAT YOU'LL LEARN */
+        .curriculum {
+            padding: 80px 24px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .curriculum h2 {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 800;
+            letter-spacing: -1px;
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .curriculum-item {
+            display: flex;
+            gap: 20px;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .curriculum-num {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent);
+            min-width: 32px;
+            height: 32px;
+            background: var(--accent-dim);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .curriculum-item h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+        .curriculum-item p { color: var(--text-secondary); font-size: 14px; }
+
+        /* INSTRUCTORS */
+        .instructors {
+            padding: 80px 24px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .instructors h2 {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 48px;
+        }
+
+        .instructors-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .instructor-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px 40px;
+            text-align: center;
+            min-width: 240px;
+        }
+
+        .instructor-avatar {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, var(--accent-dim), rgba(200, 255, 0, 0.05));
+            border: 2px solid var(--border-light);
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .instructor-card h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+        .instructor-card p { color: var(--text-secondary); font-size: 13px; }
+
+        /* CTA BOTTOM */
+        .cta-bottom {
+            padding: 80px 24px;
+            text-align: center;
+        }
+
+        .cta-bottom h2 {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+        }
+
+        .cta-bottom p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-bottom: 32px;
+            max-width: 460px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-bottom .submit-btn {
+            max-width: 320px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 32px 24px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        footer a { color: var(--text-secondary); text-decoration: none; }
+        footer a:hover { color: var(--accent); }
+
+        /* RESPONSIVE */
+        @media (max-width: 640px) {
+            nav { padding: 14px 16px; }
+            .form-container { padding: 28px 20px; }
+            .stats-row { gap: 32px; }
+            .stat-item h4 { font-size: 28px; }
+            .features-grid { grid-template-columns: 1fr; }
+        }
+
+        /* LOADING SPINNER */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid #000;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <!-- NAV -->
+    <nav>
+        <a href="https://myosin.xyz" class="nav-logo">Myosin<span>.xyz</span></a>
+        <a href="#signup" class="nav-cta">Get Early Access</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Now accepting early access signups</div>
+            <h1>Become an <span class="highlight">AI-Enabled</span> Marketer</h1>
+            <p>Learn to automate workflows, build AI-powered tools, and ship real projects. Self-paced video curriculum for marketers who want to build — no coding required.</p>
+
+            <!-- SIGNUP FORM -->
+            <div class="form-container" id="signup">
+                <div id="form-content">
+                    <h3>Get Early Access</h3>
+                    <p class="form-sub">Join the waitlist — be first when we launch.</p>
+                    <form id="lead-form">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" placeholder="Jay Franks" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="you@company.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="role">What best describes you?</label>
+                            <select id="role" name="role" required>
+                                <option value="" disabled selected>Select one</option>
+                                <option value="marketer">Marketer</option>
+                                <option value="business-owner">Business Owner</option>
+                                <option value="freelancer">Freelancer / Consultant</option>
+                                <option value="creator">Content Creator</option>
+                                <option value="student">Student / Career Switcher</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="submit-btn" id="submit-btn">
+                            <span id="btn-text">Join the Waitlist →</span>
+                            <div class="spinner" id="spinner"></div>
+                        </button>
+                    </form>
+                    <p class="form-note">🔒 No spam. Unsubscribe anytime.</p>
+                </div>
+                <div class="form-success" id="form-success">
+                    <div class="check-icon">✓</div>
+                    <h3>You're on the list! 🎉</h3>
+                    <p>We'll reach out when early access opens. Keep an eye on your inbox.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL PROOF -->
+    <section class="social-proof">
+        <div class="stats-row">
+            <div class="stat-item">
+                <h4>100+</h4>
+                <p>DAO Members Worldwide</p>
+            </div>
+            <div class="stat-item">
+                <h4>6</h4>
+                <p>Continents Represented</p>
+            </div>
+            <div class="stat-item">
+                <h4>$5M+</h4>
+                <p>In Marketing Output</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features">
+        <div class="features-header">
+            <h2>What You'll Build</h2>
+            <p>Hands-on projects that transform you from marketer to builder.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Marketing Automation</h3>
+                <p>Build workflows with n8n that run while you sleep — lead nurturing, content scheduling, data pipelines, and more.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛠️</div>
+                <h3>AI-Powered Apps</h3>
+                <p>Build your own apps and websites with Claude Code and cutting-edge models. No engineering degree needed.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Content Generation</h3>
+                <p>Create visual content generators leveraging the latest image, video, and text generation technology.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>AI Agent Systems</h3>
+                <p>Design autonomous agents that prospect, qualify, and nurture leads 24/7 — your tireless digital sales team.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Data & Analytics</h3>
+                <p>Turn raw data into actionable insights with AI-powered analysis, dashboards, and automated reporting.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>Growth Systems</h3>
+                <p>Build complete growth engines — from lead magnets to automated follow-ups — that scale without more headcount.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CURRICULUM -->
+    <section class="curriculum">
+        <h2>The Curriculum</h2>
+        <div class="curriculum-item">
+            <div class="curriculum-num">01</div>
+            <div>
+                <h4>Foundations — Think Like an Engineer</h4>
+                <p>Core mental models, prompt engineering, and how to approach building with AI tools.</p>
+            </div>
+        </div>
+        <div class="curriculum-item">
+            <div class="curriculum-num">02</div>
+            <div>
+                <h4>Automation with n8n</h4>
+                <p>Visual workflow automation — connect APIs, automate repetitive tasks, and build systems that run autonomously.</p>
+            </div>
+        </div>
+        <div class="curriculum-item">
+            <div class="curriculum-num">03</div>
+            <div>
+                <h4>Building with Claude & AI Models</h4>
+                <p>From co-working with AI to full code generation — build apps, scripts, and tools with cutting-edge models.</p>
+            </div>
+        </div>
+        <div class="curriculum-item">
+            <div class="curriculum-num">04</div>
+            <div>
+                <h4>AI Content & Video Production</h4>
+                <p>Generate visual content, video scripts, and social media assets at scale using the latest AI creative tools.</p>
+            </div>
+        </div>
+        <div class="curriculum-item">
+            <div class="curriculum-num">05</div>
+            <div>
+                <h4>Advanced — Agent Architecture</h4>
+                <p>Design multi-agent systems that work together — sales agents, optimization loops, and autonomous growth engines.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- INSTRUCTORS -->
+    <section class="instructors">
+        <h2>Your Instructors</h2>
+        <div class="instructors-grid">
+            <div class="instructor-card">
+                <div class="instructor-avatar">👤</div>
+                <h4>Jay Franks</h4>
+                <p>6+ years leading growth.<br>AI-enabled marketer.</p>
+            </div>
+            <div class="instructor-card">
+                <div class="instructor-avatar">👤</div>
+                <h4>Shane Farrell</h4>
+                <p>Marketing & Comms specialist<br>focused on AI automation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOTTOM CTA -->
+    <section class="cta-bottom">
+        <h2>Ready to level up?</h2>
+        <p>No coding background required. Just curiosity and commitment to shipping.</p>
+        <a href="#signup" class="submit-btn" style="text-decoration:none; display:inline-block;">Get Early Access →</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 <a href="https://myosin.xyz">Myosin.xyz</a> — AI-Enabled Marketer</p>
+    </footer>
+
+    <script>
+        // Google Sheets integration via Google Apps Script Web App
+        // Jay will provide the Google Sheet URL — we'll use a Google Apps Script endpoint
+        const GOOGLE_SCRIPT_URL = ''; // Will be set once Jay shares the sheet
+
+        const form = document.getElementById('lead-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const btnText = document.getElementById('btn-text');
+        const spinner = document.getElementById('spinner');
+        const formContent = document.getElementById('form-content');
+        const formSuccess = document.getElementById('form-success');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const role = document.getElementById('role').value;
+
+            if (!name || !email || !role) return;
+
+            // Show loading
+            submitBtn.disabled = true;
+            btnText.style.display = 'none';
+            spinner.style.display = 'block';
+
+            try {
+                if (GOOGLE_SCRIPT_URL) {
+                    await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            name,
+                            email,
+                            role,
+                            timestamp: new Date().toISOString(),
+                            source: 'landing-page'
+                        })
+                    });
+                }
+
+                // Show success
+                formContent.style.display = 'none';
+                formSuccess.style.display = 'block';
+
+            } catch (err) {
+                console.error('Submission error:', err);
+                // Still show success (no-cors won't return response anyway)
+                formContent.style.display = 'none';
+                formSuccess.style.display = 'block';
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
